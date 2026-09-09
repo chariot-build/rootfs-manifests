@@ -1,0 +1,51 @@
+manifest_version = 3
+
+[archives.arch_rootfs]
+url = "https://archive.archlinux.org/iso/2026.09.01/archlinux-bootstrap-2026.09.01-x86_64.tar.zst"
+hash = "895661bdf6c64e91b7725874165fd05dd30c438d3ffec661671ab5cfb261ca58"
+compression = "zstd"
+subdir = "root.x86_64"
+
+[archives.xbps]
+url = "https://repo-default.voidlinux.org/static/xbps-static-static-0.60.4_1.x86_64-musl.tar.xz"
+hash = "603b3c55e9cabd5af79b461b929b14e1556a443c97b5714d188681c2172d9e28"
+compression = "xz"
+
+[commands]
+setup = """
+echo "Server = https://archive.archlinux.org/repos/2026/09/01/\\$repo/os/\\$arch" > /etc/pacman.d/mirrorlist
+
+ln -sf /proc/self/fd /dev/fd
+
+pacman-key --init
+pacman-key --populate
+
+groupadd -g 1000 chariot
+useradd -u 1000 -g 1000 -M -s /bin/bash chariot
+passwd -l chariot
+
+sed -i 's/^DownloadUser = alpm/#DownloadUser = alpm/' /etc/pacman.conf
+
+pacman --noconfirm -Syyu
+pacman --noconfirm -S @ROOT_PACKAGES@
+"""
+pkg_download = "pacman --noconfirm -Sw @PACKAGE@"
+pkg_install = "pacman --noconfirm -S @PACKAGE@"
+
+
+[ids]
+root_uid = 0
+root_gid = 0
+user_uid = 1000
+user_gid = 1000
+
+[packages]
+bsdtar = "libarchive"
+git = "git"
+patch = "patch"
+
+root = [
+    "coreutils",
+    "bash",
+    "python",
+]
