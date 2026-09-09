@@ -2,9 +2,13 @@ name: Publish
 on:
   push:
     branches: [main]
+  workflow_run:
+    workflows: [Generate Manifests]
+    types: [completed]
 
 jobs:
   deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Publish to CDN
