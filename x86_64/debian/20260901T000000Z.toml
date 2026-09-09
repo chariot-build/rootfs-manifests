@@ -1,8 +1,8 @@
 manifest_version = 3
 
 [archives.debian_rootfs]
-url = "https://github.com/elysium-os/chariot-rootfs/releases/download/20260301T023033Z/rootfs-amd64.tar.xz"
-hash = "11a7e683043fc9e9a6ff6f03838f79202d4cb67f0b375a365e2f5d88a3ec0a74"
+url = "https://github.com/chariot-build/debian-rootfs/releases/download/20260901T000000Z/rootfs-amd64.tar.xz"
+hash = "734165adaa8e977bfee83ad0bcbe3affd2582448c317d265382e8a3d5e2972b1"
 compression = "xz"
 
 [archives.xbps]
@@ -47,35 +47,8 @@ bsdtar = "libarchive-tools"
 git = "git"
 patch = "patch"
 
-# Root packages MUST contain bash & python3
 root = [
     "coreutils",
-    "autopoint",
     "bash",
-    "file",
-    "doxygen",
-    "bzip2",
-    "findutils",
-    "gawk",
-    "bison",
-    "curl",
-    "diffutils",
-    "flex",
-    "gettext",
-    "grep",
-    "gzip",
-    "libarchive13",
-    "libssl3t64",
-    "m4",
-    "make",
-    "perl",
     "python3",
-    "sed",
-    "tar",
-    "texinfo",
-    "w3m",
-    "which",
-    "zlib1g",
-    "zstd",
-    "patch"
 ]

@@ -1,8 +1,8 @@
 manifest_version = 3
 
 [archives.arch_rootfs]
-url = "https://archive.archlinux.org/iso/2026.05.01/archlinux-bootstrap-2026.05.01-x86_64.tar.zst"
-hash = "d589f01a8da58b5c88ce6e96eb2618c2e65e635e8376caf3d4b45363afc0dd6c"
+url = "https://archive.archlinux.org/iso/2026.02.01/archlinux-bootstrap-2026.02.01-x86_64.tar.zst"
+hash = "5debe75527010999719815ca964b6f630eac525167c6ad00ba1f7aa510ba657a"
 compression = "zstd"
 subdir = "root.x86_64"
 
@@ -13,7 +13,7 @@ compression = "xz"
 
 [commands]
 setup = """
-echo "Server = https://archive.archlinux.org/repos/2026/05/01/\\$repo/os/\\$arch" > /etc/pacman.d/mirrorlist
+echo "Server = https://archive.archlinux.org/repos/2026/02/01/\\$repo/os/\\$arch" > /etc/pacman.d/mirrorlist
 
 ln -sf /proc/self/fd /dev/fd
 
