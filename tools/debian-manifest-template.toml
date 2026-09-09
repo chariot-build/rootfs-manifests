@@ -1,0 +1,54 @@
+manifest_version = 3
+
+[archives.debian_rootfs]
+url = "https://github.com/chariot-build/debian-rootfs/releases/download/%%date%%/rootfs-amd64.tar.xz"
+hash = "%%hash%%"
+compression = "xz"
+
+[archives.xbps]
+url = "https://repo-default.voidlinux.org/static/xbps-static-static-0.60.4_1.x86_64-musl.tar.xz"
+hash = "603b3c55e9cabd5af79b461b929b14e1556a443c97b5714d188681c2172d9e28"
+compression = "xz"
+
+[commands]
+setup = """
+echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+
+echo "Acquire::Check-Valid-Until \"false\";" > /etc/apt/apt.conf
+echo "Binary::apt::APT::Keep-Downloaded-Packages \"true\";" >> /etc/apt/apt.conf
+echo "APT::Install-Suggests \"false\";" >> /etc/apt/apt.conf
+echo "APT::Install-Recommends \"false\";" >> /etc/apt/apt.conf
+echo "APT::Sandbox::User \"root\";" >> /etc/apt/apt.conf
+echo "Dpkg::Use-Pty \"false\";" >> /etc/apt/apt.conf
+echo "Dir::Log::Terminal \"\";" >> /etc/apt/apt.conf
+echo 'force-unsafe-io' > /etc/dpkg/dpkg.cfg.d/unsafe-io
+
+apt-get update
+apt-get install -y locales
+locale-gen
+
+groupadd -g 1000 chariot
+useradd -u 1000 -g 1000 -M -s /bin/bash chariot
+passwd -l chariot
+
+apt-get install -y @ROOT_PACKAGES@
+"""
+pkg_download = "apt-get install -y --download-only @PACKAGE@"
+pkg_install = "apt-get install -y @PACKAGE@"
+
+[ids]
+root_uid = 0
+root_gid = 0
+user_uid = 1000
+user_gid = 1000
+
+[packages]
+bsdtar = "libarchive-tools"
+git = "git"
+patch = "patch"
+
+root = [
+    "coreutils",
+    "bash",
+    "python3",
+]

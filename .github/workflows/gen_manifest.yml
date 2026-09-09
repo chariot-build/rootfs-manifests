@@ -1,0 +1,34 @@
+name: Generate Manifests
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 1 5 * *'
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Compute dates
+        run: |
+          echo "ARCH_DATE=$(date -u +%Y.%m.01)" >> "$GITHUB_ENV"
+          echo "DEBIAN_DATE=$(date -u +%Y%m01T000000Z)" >> "$GITHUB_ENV"
+      - name: Generate Arch manifest
+        run: bash tools/gen-arch-manifest.sh "$ARCH_DATE"
+      - name: Generate Debian manifest
+        run: bash tools/gen-debian-manifest.sh "$DEBIAN_DATE"
+      - name: Commit and push
+        run: |
+          git add x86_64/arch/*.toml x86_64/debian/*.toml
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: generate $(date -u +%Y.%m) manifests"
+          git push
