@@ -1,4 +1,4 @@
-manifest_version = 3
+manifest_version = 4
 
 [archives.debian_rootfs]
 url = "https://github.com/chariot-build/debian-rootfs/releases/download/20260901T000000Z/rootfs-amd64.tar.xz"
@@ -43,10 +43,13 @@ user_uid = 1000
 user_gid = 1000
 
 [packages]
-bsdtar = "libarchive-tools"
-git = "git"
-patch = "patch"
-
+binary_map = {
+    bsdtar = "libarchive-tools",
+    git = "git",
+    patch = "patch",
+    wget = "wget",
+    sha256sum = "coreutils"
+}
 root = [
     "coreutils",
     "bash",

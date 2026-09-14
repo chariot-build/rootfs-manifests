@@ -43,10 +43,13 @@ user_uid = 1000
 user_gid = 1000
 
 [packages]
-bsdtar = "libarchive-tools"
-git = "git"
-patch = "patch"
-
+binary_map = {
+    bsdtar = "libarchive-tools",
+    git = "git",
+    patch = "patch",
+    wget = "wget",
+    sha256sum = "coreutils"
+}
 root = [
     "coreutils",
     "bash",
