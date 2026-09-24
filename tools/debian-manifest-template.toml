@@ -1,11 +1,11 @@
-manifest_version = 3
+manifest_version = 5
 
-[archives.debian_rootfs]
+[[archives]]
 url = "https://github.com/chariot-build/debian-rootfs/releases/download/%%date%%/rootfs-amd64.tar.xz"
 hash = "%%hash%%"
 compression = "xz"
 
-[archives.xbps]
+[[archives]]
 url = "https://repo-default.voidlinux.org/static/xbps-static-static-0.60.4_1.x86_64-musl.tar.xz"
 hash = "603b3c55e9cabd5af79b461b929b14e1556a443c97b5714d188681c2172d9e28"
 compression = "xz"

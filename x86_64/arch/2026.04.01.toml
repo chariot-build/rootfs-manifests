@@ -1,12 +1,15 @@
-manifest_version = 4
+manifest_version = 5
 
-[archives.arch_rootfs]
+directories = ["/dev/pts", "/dev/shm"]
+files = ["/dev/tty", "/dev/random", "/dev/urandom", "/dev/null", "/dev/zero", "/dev/full"]
+
+[[archives]]
 url = "https://archive.archlinux.org/iso/2026.04.01/archlinux-bootstrap-2026.04.01-x86_64.tar.zst"
 hash = "128ea3cf9fe0f6a76b006623c48a38147c31fcb973999a621f79c66624394866"
 compression = "zstd"
 subdir = "root.x86_64"
 
-[archives.xbps]
+[[archives]]
 url = "https://repo-default.voidlinux.org/static/xbps-static-static-0.60.4_1.x86_64-musl.tar.xz"
 hash = "603b3c55e9cabd5af79b461b929b14e1556a443c97b5714d188681c2172d9e28"
 compression = "xz"
