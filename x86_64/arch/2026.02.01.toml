@@ -1,4 +1,4 @@
-manifest_version = 5
+manifest_version = 6
 
 directories = ["/dev/pts", "/dev/shm"]
 files = ["/dev/tty", "/dev/random", "/dev/urandom", "/dev/null", "/dev/zero", "/dev/full"]
@@ -36,13 +36,6 @@ pacman --noconfirm -S @ROOT_PACKAGES@
 """
 pkg_download = "pacman --noconfirm -Sw @PACKAGE@"
 pkg_install = "pacman --noconfirm -S @PACKAGE@"
-
-
-[ids]
-root_uid = 0
-root_gid = 0
-user_uid = 1000
-user_gid = 1000
 
 [packages]
 binary_map = {
