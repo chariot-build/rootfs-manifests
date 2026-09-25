@@ -27,6 +27,8 @@ groupadd -g 1000 chariot
 useradd -u 1000 -g 1000 -M -s /bin/bash chariot
 passwd -l chariot
 
+mkdir /chariot
+
 sed -i 's/^DownloadUser = alpm/#DownloadUser = alpm/' /etc/pacman.conf
 
 pacman --noconfirm -Syyu

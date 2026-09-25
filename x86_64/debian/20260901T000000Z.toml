@@ -31,6 +31,8 @@ groupadd -g 1000 chariot
 useradd -u 1000 -g 1000 -M -s /bin/bash chariot
 passwd -l chariot
 
+mkdir /chariot
+
 apt-get install -y @ROOT_PACKAGES@
 """
 pkg_download = "apt-get install -y --download-only @PACKAGE@"
