@@ -44,7 +44,8 @@ binary_map = {
     git = "git",
     patch = "patch",
     wget = "wget",
-    sha256sum = "coreutils"
+    sha256sum = "coreutils",
+    clangd = "clangd"
 }
 root = [
     "coreutils",
