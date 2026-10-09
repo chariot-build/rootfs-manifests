@@ -41,6 +41,7 @@ pkg_install = "apt-get install -y @PACKAGE@"
 [packages]
 binary_map = {
     bsdtar = "libarchive-tools",
+    unzip = "unzip",
     git = "git",
     patch = "patch",
     wget = "wget",

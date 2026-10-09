@@ -40,6 +40,7 @@ pkg_install = "pacman --noconfirm -S @PACKAGE@"
 [packages]
 binary_map = {
     bsdtar = "libarchive",
+    unzip = "unzip",
     git = "git",
     patch = "patch",
     wget = "wget",
